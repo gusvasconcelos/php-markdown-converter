@@ -1,7 +1,6 @@
 {
     "name": "gusvasconcelos/markdown-converter",
     "description": "A PHP library for generating structured content in Markdown format with support for various elements and customization options",
-    "version": "1.0.0",
     "type": "library",
     "license": "MIT",
     "minimum-stability": "stable",

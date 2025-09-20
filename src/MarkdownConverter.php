@@ -22,7 +22,7 @@ class MarkdownConverter
 
     public function horizontalRule(): self
     {
-        $this->content[] = "---";
+        $this->content[] = PHP_EOL . "---" . PHP_EOL;
 
         return $this;
     }
