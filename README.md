@@ -3,6 +3,8 @@
 [![PHP Version](https://img.shields.io/packagist/php-v/gusvasconcelos/markdown-converter)](https://packagist.org/packages/gusvasconcelos/markdown-converter)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Latest Stable Version](https://img.shields.io/packagist/v/gusvasconcelos/markdown-converter)](https://packagist.org/packages/gusvasconcelos/markdown-converter)
+[![Downloads](https://img.shields.io/packagist/dt/gusvasconcelos/markdown-converter)
+
 
 An elegant and fluent PHP library for generating structured Markdown content with support for all essential elements and advanced customization options.
 
