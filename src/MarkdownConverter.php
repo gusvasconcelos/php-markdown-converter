@@ -25,7 +25,12 @@ class MarkdownConverter
 
     public function __construct() 
     {
-        $this->elements = new MarkdownSyntaxCollection();
+        $this->elements = MarkdownSyntaxCollection::make();
+    }
+
+    public static function make(): self
+    {
+        return new self();
     }
 
     /**
@@ -36,7 +41,7 @@ class MarkdownConverter
      */
     public function heading(string $text, int $level = 1): self
     {
-        $this->elements->add(new HeadingSyntax($text, $level));
+        $this->elements->add(HeadingSyntax::make($text, $level));
 
         return $this;
     }
@@ -47,7 +52,7 @@ class MarkdownConverter
      */
     public function horizontalRule(): self
     {
-        $this->elements->add(new HorizontalRuleSyntax());
+        $this->elements->add(HorizontalRuleSyntax::make());
 
         return $this;
     }
@@ -59,7 +64,7 @@ class MarkdownConverter
      */
     public function paragraph(string $text): self
     {
-        $this->elements->add(new ParagraphSyntax($text));
+        $this->elements->add(ParagraphSyntax::make($text));
 
         return $this;
     }
@@ -72,7 +77,7 @@ class MarkdownConverter
      */
     public function codeBlock(string $code, string $language = ""): self
     {
-        $this->elements->add(new CodeBlockSyntax($code, $language));
+        $this->elements->add(CodeBlockSyntax::make($code, $language));
 
         return $this;
     }
@@ -86,7 +91,7 @@ class MarkdownConverter
      */
     public function link(string $url, string $text, ?string $title = null): self
     {
-        $this->elements->add(new LinkSyntax($url, $text, $title));
+        $this->elements->add(LinkSyntax::make($url, $text, $title));
 
         return $this;
     }
@@ -98,7 +103,7 @@ class MarkdownConverter
      */
     public function orderedList(array $items): self
     {
-        $this->elements->add(new OrderedListSyntax($items));
+        $this->elements->add(OrderedListSyntax::make($items));
 
         return $this;
     }
@@ -110,7 +115,7 @@ class MarkdownConverter
      */
     public function unorderedList(array $items): self
     {
-        $this->elements->add(new UnorderedListSyntax($items));
+        $this->elements->add(UnorderedListSyntax::make($items));
 
         return $this;
     }
@@ -122,7 +127,7 @@ class MarkdownConverter
      */
     public function bold(string $text): self
     {
-        $this->elements->add(new BoldSyntax($text));
+        $this->elements->add(BoldSyntax::make($text));
 
         return $this;
     }
@@ -134,7 +139,7 @@ class MarkdownConverter
      */
     public function italic(string $text): self
     {
-        $this->elements->add(new ItalicSyntax($text));
+        $this->elements->add(ItalicSyntax::make($text));
 
         return $this;
     }
@@ -146,7 +151,7 @@ class MarkdownConverter
      */
     public function blockquote(string $text): self
     {
-        $this->elements->add(new BlockquoteSyntax($text));
+        $this->elements->add(BlockquoteSyntax::make($text));
 
         return $this;
     }
@@ -160,7 +165,7 @@ class MarkdownConverter
      */
     public function image(string $url, string $altText, ?string $title = null): self
     {
-        $this->elements->add(new ImageSyntax($url, $altText, $title));
+        $this->elements->add(ImageSyntax::make($url, $altText, $title));
 
         return $this;
     }
@@ -172,7 +177,7 @@ class MarkdownConverter
      */
     public function code(string $code): self
     {
-        $this->elements->add(new CodeSyntax($code));
+        $this->elements->add(CodeSyntax::make($code));
 
         return $this;
     }
@@ -184,7 +189,7 @@ class MarkdownConverter
      */
     public function emoji(string $emoji): self
     {
-        $this->elements->add(new EmojiSyntax($emoji));
+        $this->elements->add(EmojiSyntax::make($emoji));
 
         return $this;
     }

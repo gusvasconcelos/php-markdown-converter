@@ -14,6 +14,11 @@ class HeadingSyntax implements MarkdownSyntaxInterface
 
         $this->level = max(1, min(6, $level));
     }
+
+    public static function make(string $text, int $level = 1): self
+    {
+        return new self($text, $level);
+    }
     
     public function getType(): string
     {

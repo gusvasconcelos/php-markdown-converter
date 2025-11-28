@@ -16,6 +16,11 @@ class MarkdownSyntaxCollection implements Countable
         }
     }
 
+    public static function make(array $elements = []): self
+    {
+        return new self($elements);
+    }
+
     /**
      * Add an element to the collection
      */

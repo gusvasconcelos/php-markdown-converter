@@ -39,89 +39,73 @@ class MarkdownConverterTest extends TestCase
 
     public function testHeading()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->heading('Test Heading');
 
-        $content = $converter->heading('Test Heading');
-
-        $this->assertStringContainsString('# Test Heading', $content);
-    }
-
-    public function testHeadingWithLevel()
-    {
-        $converter = new MarkdownConverter();
-
-        $content = $converter->heading('Test Heading', 3);
-
-        $this->assertStringContainsString('### Test Heading', $content);
+        $this->assertStringContainsString('# Test Heading', (string) $converter);
     }
 
     public function testParagraph()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->paragraph('Test paragraph content');
 
-        $content = $converter->paragraph('Test paragraph content');
-
-        $this->assertStringContainsString('Test paragraph content', $content);
+        $this->assertStringContainsString('Test paragraph content', (string) $converter);
     }
 
     public function testHorizontalRule()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->horizontalRule();
 
-        $content = $converter->horizontalRule();
-
-        $this->assertStringContainsString('---', $content);
+        $this->assertStringContainsString('---', (string) $converter);
     }
 
     public function testCodeBlock()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->codeBlock('{"name": "John Doe", "age": 30}', 'json');
 
         $code = '{"name": "John Doe", "age": 30}';
 
-        $content = $converter->codeBlock($code, 'json');
-
-        $this->assertStringContainsString("```json\n{\"name\": \"John Doe\", \"age\": 30}\n```", $content);
+        $this->assertStringContainsString("```json\n{\"name\": \"John Doe\", \"age\": 30}\n```", (string) $converter);
     }
 
     public function testLink()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->link('https://example.com', 'Example');
 
-        $content = $converter->link('https://example.com', 'Example');
-
-        $this->assertStringContainsString('[Example](https://example.com)', $content);
+        $this->assertStringContainsString('[Example](https://example.com)', (string) $converter);
     }
 
     public function testOrderedList()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->orderedList(['Item 1', 'Item 2', 'Item 3']);
 
-        $content = $converter->orderedList(['Item 1', 'Item 2', 'Item 3']);
+        $this->assertStringContainsString('1. Item 1', (string) $converter);
 
-        $this->assertStringContainsString('1. Item 1', $content);
+        $this->assertStringContainsString('2. Item 2', (string) $converter);
 
-        $this->assertStringContainsString('2. Item 2', $content);
-
-        $this->assertStringContainsString('3. Item 3', $content);
+        $this->assertStringContainsString('3. Item 3', (string) $converter);
     }
 
     public function testUnorderedList()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->unorderedList(['Item 1', 'Item 2', 'Item 3']);
 
-        $content = $converter->unorderedList(['Item 1', 'Item 2', 'Item 3']);
+        $this->assertStringContainsString('- Item 1', (string) $converter);
 
-        $this->assertStringContainsString('- Item 1', $content);
+        $this->assertStringContainsString('- Item 2', (string) $converter);
 
-        $this->assertStringContainsString('- Item 2', $content);
-
-        $this->assertStringContainsString('- Item 3', $content);
+        $this->assertStringContainsString('- Item 3', (string) $converter);
     }
 
     public function testChainedMethods()
     {
-        $content = (new MarkdownConverter())
+        $content = MarkdownConverter::make()
             ->heading('Test Document')
             ->paragraph('This is a test paragraph')
             ->horizontalRule()
@@ -175,7 +159,7 @@ class MarkdownConverterTest extends TestCase
     {
         $filename = 'build-test';
 
-        $content = (new MarkdownConverter())
+        $content = MarkdownConverter::make()
             ->heading('Build Test')
             ->paragraph('Testing build method')
             ->write($this->tempDir, $filename);
@@ -189,7 +173,7 @@ class MarkdownConverterTest extends TestCase
 
     public function testToString()
     {
-        $content = (new MarkdownConverter())
+        $content = MarkdownConverter::make()
             ->heading('Content Test')
             ->paragraph('Testing toString method');
 
@@ -202,103 +186,96 @@ class MarkdownConverterTest extends TestCase
 
     public function testBold()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->bold('Bold Text');
 
-        $content = $converter->bold('Bold Text');
-        
-        $this->assertStringContainsString('**Bold Text**', $content);
+        $this->assertStringContainsString('**Bold Text**', (string) $converter);
     }
 
     public function testItalic()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->italic('Italic Text');
 
-        $content = $converter->italic('Italic Text');
-        
-        $this->assertStringContainsString('*Italic Text*', $content);
+        $this->assertStringContainsString('*Italic Text*', (string) $converter);
     }
 
     public function testBlockquote()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->blockquote('This is a quote');
 
-        $content = $converter->blockquote('This is a quote');
-        
-        $this->assertStringContainsString('> This is a quote', $content);
+        $this->assertStringContainsString('> This is a quote', (string) $converter);
     }
 
     public function testImage()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->image('https://example.com/image.jpg', 'Alt text', 'Title');
 
-        $content = $converter->image('https://example.com/image.jpg', 'Alt text', 'Title');
-        
-        $this->assertStringContainsString('![Alt text](https://example.com/image.jpg "Title")', $content);
+        $this->assertStringContainsString('![Alt text](https://example.com/image.jpg "Title")', (string) $converter);
     }
 
     public function testImageWithoutTitle()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->image('https://example.com/image.jpg', 'Alt text');
 
-        $content = $converter->image('https://example.com/image.jpg', 'Alt text');
-        
-        $this->assertStringContainsString('![Alt text](https://example.com/image.jpg)', $content);
+        $this->assertStringContainsString('![Alt text](https://example.com/image.jpg)', (string) $converter);
     }
 
     public function testCode()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->code('inline code');
 
-        $content = $converter->code('inline code');
-        
-        $this->assertStringContainsString('`inline code`', $content);
+        $this->assertStringContainsString('`inline code`', (string) $converter);
     }
 
     public function testEmoji()
     {
-        $converter = new MarkdownConverter();
+        $converter = MarkdownConverter::make()
+            ->emoji('😀');
 
-        $content = $converter->emoji('😀');
-        
-        $this->assertStringContainsString('😀', $content);
+        $this->assertStringContainsString('😀', (string) $converter);
     }
 
     public function testElementManagement()
     {
-        $converter = new MarkdownConverter();
-        
-        $content = $converter
+        $converter = MarkdownConverter::make()
             ->heading('Title')
             ->paragraph('Paragraph 1')
             ->paragraph('Paragraph 2');
         
-        $this->assertEquals(3, $content->count());
+        $this->assertEquals(3, $converter->count());
         
-        $element = $content->get(0);
+        $element = $converter->get(0);
 
         $this->assertEquals('heading', $element->getType());
         
-        $content->removeAt(1);
+        $converter->removeAt(1);
 
-        $this->assertEquals(2, $content->count());
+        $this->assertEquals(2, $converter->count());
         
-        $content->replace(1, new BoldSyntax('Bold'));
+        $converter->replace(1, BoldSyntax::make('Bold'));
         
-        $this->assertEquals(2, $content->count());
+        $this->assertEquals(2, $converter->count());
         
-        $this->assertStringContainsString('**Bold**', $content);
+        $this->assertStringContainsString('**Bold**', (string) $converter);
     }
 
     public function testClearElements()
     {
-        $converter = new MarkdownConverter();
-        
-        $converter->heading('Title')->paragraph('Content');
+        $converter = MarkdownConverter::make()
+            ->heading('Title')
+            ->paragraph('Content');
 
         $this->assertEquals(2, $converter->count());
-        
+
         $converter->clear();
 
         $this->assertEquals(0, $converter->count());
+
+        $this->assertStringContainsString('', (string) $converter);
     }
 }

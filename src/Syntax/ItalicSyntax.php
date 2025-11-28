@@ -10,6 +10,11 @@ class ItalicSyntax implements MarkdownSyntaxInterface
     {
         $this->text = $text;
     }
+
+    public static function make(string $text): self
+    {
+        return new self($text);
+    }
  
     public function getType(): string
     {

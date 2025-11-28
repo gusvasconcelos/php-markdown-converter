@@ -19,6 +19,11 @@ class LinkSyntax implements MarkdownSyntaxInterface
         $this->title = $title;
     }
 
+    public static function make(string $url, string $text, ?string $title = null): self 
+    {
+        return new self($url, $text, $title);
+    }
+
     public function getType(): string
     {
         return 'link';

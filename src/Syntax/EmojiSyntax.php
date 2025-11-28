@@ -11,6 +11,11 @@ class EmojiSyntax implements MarkdownSyntaxInterface
         $this->emoji = $emoji;
     }
 
+    public static function make(string $emoji): self
+    {
+        return new self($emoji);
+    }
+
     public function getType(): string
     {
         return 'emoji';

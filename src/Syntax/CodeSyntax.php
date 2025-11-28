@@ -11,13 +11,18 @@ class CodeSyntax implements MarkdownSyntaxInterface
         $this->code = $code;
     }
 
-    public function __toString(): string
+    public static function make(string $code): self
     {
-        return "`{$this->code}`";
+        return new self($code);
     }
 
     public function getType(): string
     {
         return 'code';
+    }
+    
+    public function __toString(): string
+    {
+        return "`{$this->code}`";
     }
 }

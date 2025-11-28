@@ -15,6 +15,11 @@ class CodeBlockSyntax implements MarkdownSyntaxInterface
         $this->language = $language;
     }
 
+    public static function make(string $code, string $language = ""): self
+    {
+        return new self($code, $language);
+    }
+
     public function getType(): string
     {
         return 'code_block';

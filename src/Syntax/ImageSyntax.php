@@ -18,6 +18,11 @@ class ImageSyntax implements MarkdownSyntaxInterface
 
         $this->title = $title;
     }
+
+    public static function make(string $url, string $altText, ?string $title = null): self
+    {
+        return new self($url, $altText, $title);
+    }
     
     public function getType(): string
     {
